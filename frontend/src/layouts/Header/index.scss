@@ -1,0 +1,96 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  &__container {
+    max-width: 1440px;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    width: 160px;
+    height: 50px;
+    img {
+      height: 100%;
+    }
+  }
+
+  &__nav {
+    // flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    font-size: 20px;
+  }
+
+  &__control {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+
+  &__icons {
+    width: 50px;
+    height: 50px;
+    padding: 15px;
+    display: grid;
+    place-items: center;
+  }
+
+
+
+  // &__heart{
+  //   svg{
+  //     path{
+  //       stroke: #bebebe;
+  //     }
+  //   }
+  // }
+
+  // &__cart{
+  //   svg{
+  //     path{
+  //       fill: #bebebe;
+  //     }
+  //   }
+  // }
+
+  // &__search{
+  //   svg{
+  //     circle{
+  //       stroke: #bebebe;
+  //     }
+  //     path{
+  //       stroke: #bebebe;
+  //     }
+  //   }
+  // }
+
+  &__profile{
+    margin-left: 30px;
+    border-radius: 50%;
+    background-color: #ffdd00;
+  }
+
+  &__white {
+    color: white;
+    path {
+      fill: white;
+    }
+    circle {
+      fill: white;
+    }
+  }
+}

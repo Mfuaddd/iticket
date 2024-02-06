@@ -1,0 +1,67 @@
+:root {
+  --icon-color: #bebebe;
+  --text-color: #231f20;
+}
+
+@font-face {
+  font-family: "SFProDisplay";
+  font-weight: 400;
+  font-style: normal;
+  src: url("./assets/fonts/SFProDisplay-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SFProDisplay";
+  font-weight: 500;
+  font-style: normal;
+  src: url("./assets/fonts/SFProDisplay-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SFProDisplay";
+  font-weight: 600;
+  font-style: normal;
+  src: url("./assets/fonts/SFProDisplay-Semibold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SFProDisplay";
+  font-weight: 700;
+  font-style: normal;
+  src: url("./assets/fonts/SFProDisplay-Bold.woff2") format("woff2");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: SFProDisplay;
+  font-weight: 700;
+  background-color: #f9f9f9;
+  color: #231f20;
+}
+
+svg,
+img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.container {
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.header-color {
+  --icon-color: #ffffff;
+  --text-color: #ffffff;
+}
