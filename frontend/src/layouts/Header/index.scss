@@ -1,17 +1,19 @@
+:root {
+  --icon-color: #bebebe;
+  --text-color: #231f20;
+}
+
 .header {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-
-  &__container {
-    max-width: 1440px;
-    padding: 20px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+  z-index: 2;
+  background-color: #ffffff;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
 
   &__wrapper {
+    padding: 25px 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -31,8 +33,12 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
-    padding: 20px;
+    // padding: 20px;
     font-size: 20px;
+    a {
+      color: var(--text-color);
+      padding: 10px;
+    }
   }
 
   &__control {
@@ -49,48 +55,23 @@
     place-items: center;
   }
 
-
-
-  // &__heart{
-  //   svg{
-  //     path{
-  //       stroke: #bebebe;
-  //     }
-  //   }
-  // }
-
-  // &__cart{
-  //   svg{
-  //     path{
-  //       fill: #bebebe;
-  //     }
-  //   }
-  // }
-
-  // &__search{
-  //   svg{
-  //     circle{
-  //       stroke: #bebebe;
-  //     }
-  //     path{
-  //       stroke: #bebebe;
-  //     }
-  //   }
-  // }
-
-  &__profile{
+  &__profile {
     margin-left: 30px;
     border-radius: 50%;
     background-color: #ffdd00;
   }
+}
 
-  &__white {
-    color: white;
-    path {
-      fill: white;
-    }
-    circle {
-      fill: white;
+.header-home {
+  --icon-color: #ffffff;
+  --text-color: #ffffff;
+  &.header {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  .header {
+    &__wrapper {
+      padding: 65px;
     }
   }
 }

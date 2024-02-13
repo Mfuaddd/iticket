@@ -2,22 +2,31 @@ import React, { useEffect, useState } from "react";
 import "./index.scss";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import ITicketLogoSvg from "../../assets/icons/ITicketLogoSvg";
-import HeartSvg from "../../assets/icons/HeartSvg";
-import MagnifyingGlassSvg from "../../assets/icons/MagnifyingGlassSvg";
-import CartSvg from "../../assets/icons/CartSvg";
-import ProfileSvg from "../../assets/icons/ProfileSvg";
 import NavigationDotsSvg from "../../assets/icons/NavigationDotsSvg";
+import HeartSvg from "../../assets/icons/HeartSvg";
+import ProfileSvg from "../../assets/icons/ProfileSvg";
+import CartSvg from "../../assets/icons/CartSvg";
+import MagnifyingGlassSvg from "../../assets/icons/MagnifyingGlassSvg";
 
 function Header() {
   const [isHome, setIsHome] = useState(null);
+  const [apiData, setApiData] = useState([]);
   const location = useLocation();
+
+  const getApiData = async () => {
+    const res = await fetch(`http://localhost:3000/`);
+    const data = await res.json();
+    setApiData(data);
+  };
+
   useEffect(() => {
+    getApiData();
     setIsHome(location.pathname === "/");
   }, [location]);
 
   return (
-    <div className={`header${isHome ? "" : " header-color"}`}>
-      <div className="header__container header__wrapper">
+    <div className={`header${isHome ? " header-home" : ""}`}>
+      <div className="container-1400 header__wrapper">
         <div className="header__logo">
           <Link to="/">
             <ITicketLogoSvg />
@@ -33,9 +42,15 @@ function Header() {
           <li>
             <NavLink to="/events/theatre">Theatre</NavLink>
           </li>
-          <li>Kids</li>
-          <li>Hayal Kahvesi</li>
-          <li>Sport</li>
+          <li>
+            <NavLink to="/events/kids">Kids</NavLink>
+          </li>
+          <li>
+            <NavLink to="/events/hayalkahvesi">Hayal Kahvesi</NavLink>
+          </li>
+          <li>
+            <NavLink to="/events/sport">Sport</NavLink>
+          </li>
           <li className="header__icons">
             <NavigationDotsSvg />
           </li>
