@@ -13,7 +13,7 @@ export const eventRouter = Router();
 
 eventRouter
   .get("/", getAllEvents)
-  .get("/:categoryName", getEventByCategory)
+  .get("/find/:id", getEventByCategory)
   .get("/:id", getEventById)
   .post("/", verifyAccess(["admin"]), postEvent)
   .put("/:id", verifyAccess(["admin"]), putEventById)

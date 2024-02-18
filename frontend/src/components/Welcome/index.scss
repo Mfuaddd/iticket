@@ -1,5 +1,6 @@
 .welcome {
-  margin-bottom: 50px;
+  padding-bottom: 250px;
+  margin-bottom: -200px;
   overflow: hidden;
   &__wrapper {
     padding: 20px;
@@ -26,6 +27,7 @@
     img{
       border-radius: 20px;
       overflow: hidden;
+      cursor: pointer;
     }
     &__prev {
       left: 20px;
@@ -44,6 +46,7 @@
       z-index: 1;
       display: grid;
       place-items: center;
+      cursor: pointer;
 
       svg {
         width: 30px;

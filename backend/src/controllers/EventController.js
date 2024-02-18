@@ -6,7 +6,7 @@ export const getAllEvents = async (req, res) => {
     const events = await eventModel.find({});
     res.send(events);
   } catch (error) {
-    console.error(error.message);
+    return res.status(500).send({ error: error.message });
   }
 };
 
@@ -16,22 +16,17 @@ export const getEventById = async (req, res) => {
     const event = await eventModel.findById(id);
     res.send(event);
   } catch (error) {
-    return res.status(401).send({ error: error.message });
+    return res.status(500).send({ error: error.message });
   }
 };
 
 export const getEventByCategory = async (req, res) => {
   try {
-    const { categoryName } = req.params;
-    const categoryId = await categoriesModel.findOne({ endpoint: categoryName })
-    if (!categoryId){
-      return res.status(404).send({ error: "Category not found" });
-    }
-    const event = await eventModel.find({ categoryId: categoryId._id }).populate("categoryId");
-    console.log(categoryId);
+    const { id } = req.params;
+    const event = await eventModel.find({ category_id: id });
     res.send(event);
   } catch (error) {
-    return res.status(401).send({ error: error.message });
+    return res.status(500).send({ error: error.message });
   }
 };
 
@@ -68,7 +63,7 @@ export const postEvent = async (req, res) => {
     await newEvent.save();
     res.send("Got a POST request");
   } catch (error) {
-    return res.status(401).send({ error: error.message });
+    return res.status(500).send({ error: error.message });
   }
 };
 
@@ -105,7 +100,7 @@ export const putEventById = async (req, res) => {
     });
     res.send("Got a PUT request");
   } catch (error) {
-    return res.status(401).send({ error: error.message });
+    return res.status(500).send({ error: error.message });
   }
 };
 
@@ -115,6 +110,6 @@ export const deleteEventById = async (req, res) => {
     await eventModel.findByIdAndDelete(id);
     res.send("Got a DELETE request");
   } catch (error) {
-    return res.status(401).send({ error: error.message });
+    return res.status(500).send({ error: error.message });
   }
 };

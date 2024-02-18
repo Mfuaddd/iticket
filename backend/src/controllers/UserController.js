@@ -23,7 +23,7 @@ export const postUser = async (req, res) => {
   try {
     const { first_name, last_name, phone_number, email, password, role } =
       req.body;
-    const newEvent = userModel({
+    const newUser = userModel({
       first_name,
       last_name,
       phone_number,
@@ -31,7 +31,7 @@ export const postUser = async (req, res) => {
       password,
       role,
     });
-    await newEvent.save();
+    await newUser.save();
     res.send("Got a POST request");
   } catch (error) {
     return res.status(401).send({ error: error.message });

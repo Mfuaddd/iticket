@@ -6,6 +6,8 @@ import { eventRouter } from "./src/routers/EventRouter.js";
 import { userRouter } from "./src/routers/UserRouter.js";
 import { authRouter } from "./src/routers/AuthRouter.js";
 import { categoriesRouter } from "./src/routers/CategoriesRouter.js";
+import { placeRouter } from "./src/routers/PlaceRouter.js";
+import { sectorRouter } from "./src/routers/SectorRouter.js";
 const app = express();
 const port = process.env.PORT;
 const dbKey = process.env.DB_KEY;
@@ -17,6 +19,9 @@ app.use("/events", eventRouter);
 app.use("/users", userRouter);
 app.use("/auth", authRouter);
 app.use("/categories", categoriesRouter);
+app.use("/places",placeRouter);
+app.use("/sectors",sectorRouter);
+app.use("/sessions",sectorRouter);
 
 await mongoose
   .connect(dbKey)

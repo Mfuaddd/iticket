@@ -22,7 +22,7 @@ export const login = async (req, res) => {
       { email: user.email, role: user.role },
       jwtKey,
       {
-        expiresIn: "1h",
+        expiresIn: "25h",
       }
     );
     res.status(200).json({ token });
@@ -47,7 +47,7 @@ export const register = async (req, res) => {
       { email: newUser.email, role: newUser.role },
       jwtKey,
       {
-        expiresIn: "1h",
+        expiresIn: "25h",
       }
     );
     res.status(201).json({ token });

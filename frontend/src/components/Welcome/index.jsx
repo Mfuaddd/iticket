@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "./index.scss";
 import "swiper/scss";
 import ArrowSvg from "../../assets/icons/ArrowSvg";
+import { getFetch } from "../../helpers/FetchHelper";
+import { useNavigate } from "react-router-dom";
 
 function Welcome() {
+  const [Events, setEvents] = useState([]);
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    getFetch("http://localhost:3000/events", setEvents);
+  }, []);
+  
   return (
     <div className="welcome">
       <div className="container-1400 welcome__wrapper">
@@ -21,32 +30,22 @@ function Welcome() {
           }}
           loop={true}
         >
-          <SwiperSlide>
-            <img
-              className="no-select"
-              src="https://cdn.iticket.az/event/slide/IXpemoVo6gueJRGurjrYdfroAgr5WIQv3Xe9ndRq.jpg"
-              alt=""
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              className="no-select"
-              src="https://cdn.iticket.az/event/slide/0rDjeipqrWWIYYQ5jN8xhhqQALKVsmDC7Wl0BIt9.jpg"
-              alt=""
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img
-              className="no-select"
-              src="https://cdn.iticket.az/event/slide/6SPSNi5y6MhMzH6Cmj9CY1NKzOnWfZyRbtvE8X7h.jpg"
-              alt=""
-            />
-          </SwiperSlide>
+          {Events &&
+            Events.slice(0, 8).map((item) => (
+              <SwiperSlide key={item._id}>
+                <img
+                  onClick={()=>navigate(`/detail/${item._id}`)}
+                  className="no-select"
+                  src={item.slide_img}
+                  alt={item.name}
+                />
+              </SwiperSlide>
+            ))}
         </Swiper>
-        <div className="welcome__swiper__prev welcome__swiper__button">
+        <div className="welcome__swiper__prev welcome__swiper__button no-select">
           <ArrowSvg />
         </div>
-        <div className="welcome__swiper__next welcome__swiper__button">
+        <div className="welcome__swiper__next welcome__swiper__button no-select">
           <ArrowSvg />
         </div>
       </div>

@@ -5,18 +5,13 @@ import { Navigation } from "swiper/modules";
 import "swiper/scss";
 import ArrowSvg from "../../assets/icons/ArrowSvg";
 import Card from "../Card";
+import { getFetch } from "../../helpers/FetchHelper";
 
 function HomeSection({ section, header, endpoint, bg }) {
   const [apiData, setApiData] = useState([]);
 
-  const getApiData = async () => {
-    const res = await fetch(`http://localhost:3000/${endpoint}`);
-    const data = await res.json();
-    setApiData(data);
-  };
-
   useEffect(() => {
-    getApiData();
+    getFetch(`http://localhost:3000/${endpoint}`,setApiData)
   }, []);
 
   return (
@@ -28,7 +23,7 @@ function HomeSection({ section, header, endpoint, bg }) {
         <Swiper
           className="home-section__swiper"
           modules={[Navigation]}
-          spaceBetween={0}
+          spaceBetween={40}
           centeredSlides={true}
           slidesPerView={"auto"}
           navigation={{
@@ -38,28 +33,23 @@ function HomeSection({ section, header, endpoint, bg }) {
           }}
           loop={true}
         >
-          {/* <SwiperSlide className="popular__swiper__slide">
-            <PopularCard />
-          </SwiperSlide> */}
           {apiData &&
-            apiData.map((item) => {
-              return (
-                <SwiperSlide
-                  key={item._id}
-                  className="home-section__swiper__slide"
-                >
-                  <Card item={item} />
-                </SwiperSlide>
-              );
-            })}
+            apiData.map((item) => (
+              <SwiperSlide
+                key={item._id}
+                className="home-section__swiper__slide"
+              >
+                <Card item={item} width={"470px"} height={"520px"} />
+              </SwiperSlide>
+            ))}
         </Swiper>
         <div
-          className={`${section}__swiper__prev home-section__swiper__prev home-section__swiper__button`}
+          className={`${section}__swiper__prev home-section__swiper__prev home-section__swiper__button no-select`}
         >
           <ArrowSvg />
         </div>
         <div
-          className={`${section}__swiper__next home-section__swiper__next home-section__swiper__button`}
+          className={`${section}__swiper__next home-section__swiper__next home-section__swiper__button no-select`}
         >
           <ArrowSvg />
         </div>

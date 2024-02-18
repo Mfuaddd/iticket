@@ -26,6 +26,10 @@
   src: url("./assets/fonts/SFProDisplay-Bold.woff2") format("woff2");
 }
 
+:root{
+  --rs-primary-500:#ffdd00 !important;
+}
+
 * {
   margin: 0;
   padding: 0;
