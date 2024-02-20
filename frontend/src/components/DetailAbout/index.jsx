@@ -4,7 +4,7 @@ import "./index.scss";
 function DetailAbout({ item }) {
   const [activeTab, setActiveTab] = useState(true);
   const [activeImage, setActiveImage] = useState(null);
-  
+
   return (
     <div className="detail-about">
       <div className="container-1200 detail-about__wrapper">
@@ -45,12 +45,18 @@ function DetailAbout({ item }) {
               </span>
               <img className="image-modal__content" src={activeImage}></img>
             </div>
-            {item.slide_img &&
-              item.slide_img.map((image, index) => (
-                <div className="detail-about__image" key={index}>
-                  <img src={image} onClick={() => setActiveImage(image)} />
-                </div>
-              ))}
+            <div className="detail-about__image">
+              <img
+                src={item.slide_img}
+                onClick={() => setActiveImage(item.slide_img)}
+              />
+            </div>
+            <div className="detail-about__image">
+              <img
+                src={item.detail_img}
+                onClick={() => setActiveImage(item.detail_img)}
+              />
+            </div>
           </div>
         </div>
         <div className="detail-about__big-image">

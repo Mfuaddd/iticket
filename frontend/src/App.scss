@@ -53,6 +53,13 @@ img {
   max-height: 100%;
 }
 
+svg,img,button{
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
 .container-1200 {
   max-width: 1240px;
   margin-left: auto;
@@ -63,8 +70,6 @@ img {
   margin-left: auto;
   margin-right: auto;
 }
-
-
 
 .no-select {
   user-select: none;

@@ -13,17 +13,16 @@ function DetailPage() {
   const { id } = useParams();
 
   useEffect(() => {
-    getFetch(`http://localhost:3000/events/${id}`,setApiData)
+    getFetch(`http://localhost:3000/events/${id}`, setApiData);
   }, []);
 
   return (
     <>
-      <DetailWelcome detail_img={apiData?.detail_img} price={apiData?.detail_img}/>
-      <DetailInfo age={apiData?.age}/>
-      <DetailAbout item={apiData}/>
-      <DetailVenue placeId={apiData?.place_id}/>
-      <DetailSimilar categoryId={apiData?.category_id}/>
-
+      <DetailWelcome detail_img={apiData?.detail_img} price={apiData?.price} />
+      <DetailInfo age={apiData?.age} />
+      <DetailAbout item={apiData} />
+      <DetailVenue placeId={apiData?.place_id} />
+      <DetailSimilar categoryId={apiData?.category_id} />
     </>
   );
 }

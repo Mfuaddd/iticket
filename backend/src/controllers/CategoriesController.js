@@ -21,8 +21,8 @@ export const getCategoryById = async (req, res) => {
 
 export const postCategory = async (req, res) => {
   try {
-    const { name, endpoint, index } = req.body;
-    const newCategory = categoriesModel({ name, endpoint, index });
+    const { name, index } = req.body;
+    const newCategory = categoriesModel({ name, index });
     await newCategory.save();
     res.send("Got a POST request");
   } catch (error) {
@@ -33,8 +33,8 @@ export const postCategory = async (req, res) => {
 export const putCategoryById = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, endpoint, index } = req.body;
-    await categoriesModel.findByIdAndUpdate(id, { name, endpoint, index });
+    const { name, index } = req.body;
+    await categoriesModel.findByIdAndUpdate(id, { name, index });
     res.send("Got a PUT request");
   } catch (error) {
     return res.status(500).send({ error: error.message });

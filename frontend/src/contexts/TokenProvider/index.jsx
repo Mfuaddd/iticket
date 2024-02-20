@@ -9,7 +9,7 @@ function TokenProvider({ children }) {
   const [token, setToken] = useState(null);
   const [decode, setDecode] = useState(null);
 
-  const addToken = (data) => {
+  const addToken = async (data) => {
     try {
       const decode = jwtDecode(data);
       setDecode(decode);
@@ -20,11 +20,20 @@ function TokenProvider({ children }) {
     }
   };
 
+  const refreshToken = async (value) => {
+    const decode = jwtDecode(value);
+    setDecode(decode);
+    setToken(value);
+  };
+
   const checkToken = () => {
     try {
       const token = getCookie("token");
       if (!!token) {
-        addToken(token);
+        refreshToken(token);
+      } else {
+        setToken(false);
+        setDecode(false);
       }
     } catch (error) {
       console.log(error.message);
@@ -33,8 +42,8 @@ function TokenProvider({ children }) {
 
   const logout = () => {
     setCookie("token", "");
-    setToken(null)
-    setDecode(null)
+    setToken(null);
+    setDecode(null);
   };
 
   const data = {

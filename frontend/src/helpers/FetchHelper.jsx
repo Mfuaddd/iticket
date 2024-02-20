@@ -3,10 +3,18 @@ export const getFetch = async (url, cb, token) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "Authorization-Type": "Bearer " + token,
+      Authorization: `Bearer ${token}`,
     },
   });
   const data = await res.json();
-  console.log("fetch",url,data);
   cb(data);
+};
+
+export const deleteFetch = async (url, id, token) => {
+  await fetch(url + id, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };

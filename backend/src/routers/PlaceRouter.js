@@ -7,12 +7,13 @@ import {
   postPlace,
   putPlaceById,
 } from "../controllers/PlaceController.js";
+import { upload } from "../middlewares/MulterMiddleware.js";
 
 export const placeRouter = Router();
 
 placeRouter
   .get("/", getAllPlaces)
   .get("/:id", getPlaceById)
-  .post("/", verifyAccess(["admin"]), postPlace)
-  .put("/:id", verifyAccess(["admin"]), putPlaceById)
+  .post("/", upload.single("image"), verifyAccess(["admin"]), postPlace)
+  .put("/:id", upload.single("image"), verifyAccess(["admin"]), putPlaceById)
   .delete("/:id", verifyAccess(["admin"]), deletePlaceById);

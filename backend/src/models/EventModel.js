@@ -12,7 +12,7 @@ const eventSchema = new Schema({
   img_bg: String,
   img_fr: String,
   detail_img: String,
-  slide_img: [String],
+  slide_img: String,
 });
 
 export const eventModel = mongoose.model("events", eventSchema);

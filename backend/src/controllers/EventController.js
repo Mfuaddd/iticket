@@ -1,3 +1,4 @@
+import { host } from "../../index.js";
 import { categoriesModel } from "../models/CategoriesModel.js";
 import { eventModel } from "../models/EventModel.js";
 
@@ -32,37 +33,27 @@ export const getEventByCategory = async (req, res) => {
 
 export const postEvent = async (req, res) => {
   try {
-    const {
-      name,
-      price,
-      date,
-      place,
-      about,
-      age,
-      category,
-      language,
-      img_bg,
-      img_fr,
-      detail_img,
-      slide_img,
-    } = req.body;
+    const { name, price, date, place_id, about, age, category_id, language } =
+      req.body;
+    const { img_bg, img_fr, detail_img, slide_img } = req.files;
     const newEvent = eventModel({
       name,
       price,
       date,
-      place,
+      place_id,
       about,
       age,
-      category,
+      category_id,
       language,
-      img_bg,
-      img_fr,
-      detail_img,
-      slide_img,
+      img_bg: `${host}public/${img_bg[0].filename}`,
+      img_fr: `${host}public/${img_fr[0].filename}`,
+      detail_img: `${host}public/${detail_img[0].filename}`,
+      slide_img: `${host}public/${slide_img[0].filename}`,
     });
     await newEvent.save();
     res.send("Got a POST request");
   } catch (error) {
+    console.log(error.message);
     return res.status(500).send({ error: error.message });
   }
 };
@@ -70,36 +61,31 @@ export const postEvent = async (req, res) => {
 export const putEventById = async (req, res) => {
   try {
     const { id } = req.params;
-    const {
-      name,
-      price,
-      date,
-      place,
-      about,
-      age,
-      category,
-      language,
-      img_bg,
-      img_fr,
-      detail_img,
-      slide_img,
-    } = req.body;
+    const { name, price, date, place_id, about, age, category_id, language } =
+      req.body;
+    const { img_bg, img_fr, detail_img, slide_img } = req.files;
+    const old = await eventModel.findById(id);
     await eventModel.findByIdAndUpdate(id, {
       name,
       price,
       date,
-      place,
+      place_id,
       about,
       age,
-      category,
+      category_id,
       language,
-      img_bg,
-      img_fr,
-      detail_img,
-      slide_img,
+      img_bg: !img_bg ? old.img_bg : `${host}public/${img_bg[0].filename}`,
+      img_fr: !img_fr ? old.img_fr : `${host}public/${img_fr[0].filename}`,
+      detail_img: !detail_img
+        ? old.detail_img
+        : `${host}public/${detail_img[0].filename}`,
+      slide_img: !slide_img
+        ? old.slide_img
+        : `${host}public/${slide_img[0].filename}`,
     });
     res.send("Got a PUT request");
   } catch (error) {
+    console.log(error);
     return res.status(500).send({ error: error.message });
   }
 };
