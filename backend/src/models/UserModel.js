@@ -8,6 +8,7 @@ const userSchema = new Schema({
     type: String,
     unique: true,
   },
+  wishlist_id: [{ type: Schema.Types.ObjectId, ref: "events" }],
   password: String,
   role: {
     type: String,

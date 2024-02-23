@@ -6,8 +6,8 @@ import { getCookie, setCookie } from "../../helpers/CookieHelper";
 export const tokenContext = createContext();
 
 function TokenProvider({ children }) {
-  const [token, setToken] = useState(null);
-  const [decode, setDecode] = useState(null);
+  const [token, setToken] = useState(undefined);
+  const [decode, setDecode] = useState(undefined);
 
   const addToken = async (data) => {
     try {
@@ -26,9 +26,9 @@ function TokenProvider({ children }) {
     setToken(value);
   };
 
-  const checkToken = () => {
+  const checkToken = async() => {
     try {
-      const token = getCookie("token");
+      const token = await getCookie("token");
       if (!!token) {
         refreshToken(token);
       } else {
@@ -40,7 +40,7 @@ function TokenProvider({ children }) {
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
     setCookie("token", "");
     setToken(null);
     setDecode(null);

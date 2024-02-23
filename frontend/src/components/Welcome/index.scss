@@ -5,26 +5,23 @@
   &__wrapper {
     padding: 20px;
     position: relative;
-    overflow: hidden;
-    filter: drop-shadow(0 52px 94px rgba(0,0,0,.308949));
+    filter: drop-shadow(0 52px 94px rgba(0, 0, 0, 0.308949));
   }
 
-  &::after{
+  &::before {
     content: "";
+    background-color: #fd0;
+    z-index: -1;
+    left: calc(50% - 23px);
+    padding-top: 20%;
     position: absolute;
     top: 0;
-    left: 0;
+    transform: translateX(-50%) rotate(-33deg);
     width: 200vw;
-    height: calc(50px + 10vw);
-    transform-origin: center;
-    transform: translate(-25%,-25%) rotate(-35deg);
-    background-color: #ffdd00;
-    filter: drop-shadow(0 52px 94px rgba(0,0,0,.308949));
-    z-index: -1;
   }
 
   &__swiper {
-    img{
+    img {
       border-radius: 20px;
       overflow: hidden;
       cursor: pointer;
@@ -51,6 +48,26 @@
       svg {
         width: 30px;
         height: 30px;
+      }
+    }
+  }
+  @media only screen and (max-width: 1256px) {
+    &__swiper {
+      &__button {
+        display: none;
+      }
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    &__wrapper{
+      padding: 0;
+    }
+    &__swiper {
+      img {
+        border-radius: 0;
+      }
+      &__button {
+        display: none;
       }
     }
   }

@@ -1,12 +1,15 @@
 import React from "react";
 import FetchProvider from "../FetchProvider";
 import TokenProvider from "../TokenProvider";
+import WishlistProvider from "../WishlistProvider";
 
 function MainProvider({ children }) {
   return (
     <>
       <TokenProvider>
-        <FetchProvider>{children}</FetchProvider>
+        <WishlistProvider>
+          <FetchProvider>{children}</FetchProvider>
+        </WishlistProvider>
       </TokenProvider>
     </>
   );

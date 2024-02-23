@@ -11,7 +11,7 @@ function HomeSection({ section, header, endpoint, bg }) {
   const [apiData, setApiData] = useState([]);
 
   useEffect(() => {
-    getFetch(`http://localhost:3000/${endpoint}`,setApiData)
+    getFetch(`http://localhost:3000/${endpoint}`, setApiData);
   }, []);
 
   return (
@@ -24,7 +24,7 @@ function HomeSection({ section, header, endpoint, bg }) {
           className="home-section__swiper"
           modules={[Navigation]}
           spaceBetween={40}
-          centeredSlides={true}
+          centeredSlides={false}
           slidesPerView={"auto"}
           navigation={{
             nextEl: `.${section}__swiper__next`,
@@ -32,6 +32,18 @@ function HomeSection({ section, header, endpoint, bg }) {
             disabledClass: "swiper-button-disabled",
           }}
           loop={true}
+          breakpoints={{
+            1536: {
+              centeredSlides: false,
+            },
+            768: {
+              slidesPerView: "auto",
+            },
+            256: {
+              centeredSlides: true,
+              slidesPerView: 1,
+            },
+          }}
         >
           {apiData &&
             apiData.map((item) => (

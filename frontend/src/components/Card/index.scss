@@ -1,10 +1,10 @@
 .card {
-  display: inline-block;
+  // display: inline-block;
   position: relative;
   cursor: pointer;
   &:hover {
     .card__front {
-      height: calc(100% - 80px);
+      height: calc(100% - 100px);
     }
     .card__info {
       color: var(--text-color);
@@ -68,6 +68,8 @@
     font-size: 20px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
+    white-space: nowrap;
+
     &__place{
       display: none;
     }

@@ -5,12 +5,14 @@
     padding: 30px;
     font-size: 24px;
     border-right: 2px solid #000;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
   }
   &__logo {
     width: 200px;
     margin-bottom: 50px;
     margin-right: 40px;
+    cursor: pointer;
   }
 
   &__nav {

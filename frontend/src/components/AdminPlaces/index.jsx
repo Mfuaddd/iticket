@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Helmet } from 'react-helmet-async';
 import { fetchContext } from "../../contexts/FetchProvider";
 import { tokenContext } from "../../contexts/TokenProvider";
-import AdminPlacesModal from "../AdminPlacesModal";
 import { deleteFetch } from "../../helpers/FetchHelper";
+import AdminPlacesModal from "../AdminPlacesModal";
 
 function AdminPlaces() {
   const [isModal, setIsModal] = useState(null);
@@ -36,68 +37,73 @@ function AdminPlaces() {
   };
 
   return (
-    <div className="admin-page">
-      {isModal ? (
-        <AdminPlacesModal setIsOpen={setIsModal} values={isModal} />
-      ) : null}
-      <div className="admin-page__header">
-        <div className="admin-page__logo">Places</div>
-        <div className="admin-page__control">
-          <div onClick={handleAdd}>Add</div>
+    <>
+      <Helmet>
+        <title>Places | Admin Panel</title>
+      </Helmet>
+      <div className="admin-page">
+        {isModal ? (
+          <AdminPlacesModal setIsOpen={setIsModal} values={isModal} />
+        ) : null}
+        <div className="admin-page__header">
+          <div className="admin-page__logo">Places</div>
+          <div className="admin-page__control">
+            <div onClick={handleAdd}>Add</div>
+          </div>
+        </div>
+        <div className="admin-page__table table">
+          <table>
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Location Api</th>
+                <th>Phone</th>
+                <th>Mobile</th>
+                <th>Address</th>
+                <th>Map Link</th>
+                <th>Control</th>
+              </tr>
+            </thead>
+            <tbody>
+              {apiPlaces.map((item) => (
+                <tr key={item._id}>
+                  <td className="admin-page__table__image">
+                    <img src={item.image} alt="" />
+                  </td>
+                  <td>{item.name}</td>
+                  <td>
+                    <a href={item.location}>link</a>
+                  </td>
+                  <td>{item.phone}</td>
+                  <td>{item.mobile}</td>
+                  <td>{item.address}</td>
+                  <td>
+                    <a href={item.link}>link</a>
+                  </td>
+                  <td>
+                    <div className="admin-page__table__control">
+                      <div
+                        className="admin-page__table__edit"
+                        onClick={() => handleEdit(item._id)}
+                      >
+                        Edit
+                      </div>
+                      <div
+                        className="admin-page__table__delete"
+                        onClick={() => deletePost(item._id)}
+                      >
+                        Delete
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
-      <div className="admin-page__table table">
-        <table>
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Location Api</th>
-              <th>Phone</th>
-              <th>Mobile</th>
-              <th>Address</th>
-              <th>Map Link</th>
-              <th>Control</th>
-            </tr>
-          </thead>
-          <tbody>
-            {apiPlaces.map((item) => (
-              <tr key={item._id}>
-                <td className="admin-page__table__image">
-                  <img src={item.image} alt="" />
-                </td>
-                <td>{item.name}</td>
-                <td>
-                  <a href={item.location}>link</a>
-                </td>
-                <td>{item.phone}</td>
-                <td>{item.mobile}</td>
-                <td>{item.address}</td>
-                <td>
-                  <a href={item.link}>link</a>
-                </td>
-                <td>
-                  <div className="admin-page__table__control">
-                    <div
-                      className="admin-page__table__edit"
-                      onClick={() => handleEdit(item._id)}
-                    >
-                      Edit
-                    </div>
-                    <div
-                      className="admin-page__table__delete"
-                      onClick={() => deletePost(item._id)}
-                    >
-                      Delete
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    </>
   );
 }
 

@@ -1,11 +1,11 @@
-export function setCookie(name, value, exp) {
+export async function setCookie(name, value, exp) {
   const d = new Date();
   d.setTime(d.getTime() + exp);
   const expires = "expires=" + d.toUTCString();
   document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
 
-export function getCookie(cookieName) {
+export async function getCookie(cookieName) {
   const name = cookieName + "=";
   const decodedCookie = decodeURIComponent(document.cookie);
   const ca = decodedCookie.split(";");

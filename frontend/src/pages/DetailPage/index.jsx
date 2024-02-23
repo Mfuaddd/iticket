@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "./index.scss";
-import DetailWelcome from "../../components/DetailWelcome";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import DetailAbout from "../../components/DetailAbout";
-import { getFetch } from "../../helpers/FetchHelper";
-import DetailVenue from "../../components/DetailVenue";
-import DetailSimilar from "../../components/DetailSimilar";
 import DetailInfo from "../../components/DetailInfo";
+import DetailSimilar from "../../components/DetailSimilar";
+import DetailVenue from "../../components/DetailVenue";
+import DetailWelcome from "../../components/DetailWelcome";
+import { getFetch } from "../../helpers/FetchHelper";
+import "./index.scss";
 
 function DetailPage() {
   const [apiData, setApiData] = useState([]);
@@ -18,7 +19,14 @@ function DetailPage() {
 
   return (
     <>
-      <DetailWelcome detail_img={apiData?.detail_img} price={apiData?.price} />
+      <Helmet>
+        <title>{apiData?.name}</title>
+      </Helmet>
+      <DetailWelcome
+        detail_img={apiData?.detail_img}
+        price={apiData?.price}
+        id={id}
+      />
       <DetailInfo age={apiData?.age} />
       <DetailAbout item={apiData} />
       <DetailVenue placeId={apiData?.place_id} />

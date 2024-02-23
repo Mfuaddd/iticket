@@ -78,4 +78,17 @@
       }
     }
   }
+  @media only screen and (max-width: 1024px) {
+    &__body{
+      display: flex;
+      flex-direction: column;
+    }
+    &__map {
+      width: 100%;
+      height: 320px;
+    }
+    &__place {
+      width: 100%;
+    }
+  }
 }

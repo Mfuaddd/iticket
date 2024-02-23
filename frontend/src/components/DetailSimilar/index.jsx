@@ -11,7 +11,6 @@ function DetailSimilar({ categoryId }) {
     }
   }, [categoryId]);
 
-  console.log(Events);
   return (
     <div className="detail-similar">
       <div className="container-1200 detail-similar__wrapper">

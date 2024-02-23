@@ -9,6 +9,7 @@ import { authRouter } from "./src/routers/AuthRouter.js";
 import { categoriesRouter } from "./src/routers/CategoriesRouter.js";
 import { placeRouter } from "./src/routers/PlaceRouter.js";
 import { sectorRouter } from "./src/routers/SectorRouter.js";
+import { wishlistRouter } from "./src/routers/WishlistRouter.js";
 
 const app = express();
 const port = process.env.PORT;
@@ -26,6 +27,7 @@ app.use("/categories", categoriesRouter);
 app.use("/places", placeRouter);
 app.use("/sectors", sectorRouter);
 app.use("/sessions", sectorRouter);
+app.use("/wishlist", wishlistRouter);
 
 await mongoose
   .connect(dbKey)

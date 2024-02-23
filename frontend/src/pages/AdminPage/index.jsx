@@ -1,8 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import "./index.scss";
 import ITicketLogoSvg from "../../assets/icons/ITicketLogoSvg";
-import { fetchContext } from "../../contexts/FetchProvider";
-import { getFetch } from "../../helpers/FetchHelper";
 import AdminPlaces from "../../components/AdminPlaces";
 import { useNavigate, useParams } from "react-router-dom";
 import AdminCategories from "../../components/AdminCategories";
@@ -12,19 +10,13 @@ import AdminUsers from "../../components/AdminUsers";
 function AdminPage() {
   const { page } = useParams();
   const navigate = useNavigate();
-  // const { apiCategories, getApiPlaces, getApiCategories } =
-  //   useContext(fetchContext);
 
   const handleSelect = (e) => {
     navigate(`/adminpanel/${e.target.innerText}`.toLocaleLowerCase());
   };
 
-  const checkSelect = (value) => {
-    return value === page.toLocaleLowerCase();
-  };
-
   const checkActive = (value) => {
-    return checkSelect(value) ? "admin-panel__nav-active" : "";
+    return value === page.toLocaleLowerCase() ? "admin-panel__nav-active" : "";
   };
 
   const renderSwitch = () => {
@@ -38,7 +30,7 @@ function AdminPage() {
       case "events":
         return <AdminEvents />;
       default:
-        break;
+        return <AdminUsers />;
     }
   };
 
@@ -62,13 +54,9 @@ function AdminPage() {
             Events
           </li>
           <li></li>
-          {/* <li onClick={handleSelect}></li> */}
         </ul>
       </div>
-      <div className="admin-panel__body">
-        {renderSwitch()}
-        {/* <AdminPlaces /> */}
-      </div>
+      <div className="admin-panel__body">{renderSwitch()}</div>
     </div>
   );
 }

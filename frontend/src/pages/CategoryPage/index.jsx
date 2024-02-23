@@ -1,46 +1,58 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import "./index.scss";
-
-import SelectPicker from "rsuite/SelectPicker";
-import DateRangePicker from "rsuite/DateRangePicker";
-import RangeSlider from "rsuite/RangeSlider";
-import "rsuite/SelectPicker/styles/index.css";
-import "rsuite/DateRangePicker/styles/index.css";
-import "rsuite/RangeSlider/styles/index.css";
-import Card from "../../components/Card";
 import { useLocation, useParams } from "react-router-dom";
-import { getFetch } from "../../helpers/FetchHelper";
+import DateRangePicker from "rsuite/DateRangePicker";
+import "rsuite/DateRangePicker/styles/index.css";
+import RangeSlider from "rsuite/RangeSlider";
+import "rsuite/RangeSlider/styles/index.css";
+import SelectPicker from "rsuite/SelectPicker";
+import "rsuite/SelectPicker/styles/index.css";
+import Card from "../../components/Card";
 import { fetchContext } from "../../contexts/FetchProvider";
+import { getFetch } from "../../helpers/FetchHelper";
+import { tokenContext } from "../../contexts/TokenProvider";
+import { wishlistContext } from "../../contexts/WishlistProvider";
 
-function CategoryPage() {
+function CategoryPage({ type }) {
   const [sliderRange, setSliderRange] = useState([0, 100]);
   const [placeFilter, setPlaceFilter] = useState(null);
   const { apiPlaces, apiCategories } = useContext(fetchContext);
+  const { wishlist } = useContext(wishlistContext);
   const { id } = useParams();
   const location = useLocation();
 
   const [Events, setEvents] = useState([]);
 
-  // useEffect(() => {
-  //   item._id === null
-  //     ? getFetch("http://localhost:3000/events", setEvents)
-  //     : getFetch(`http://localhost:3000/events/find/${item._id}`, setEvents);
-  // }, [location]);
-
   useEffect(() => {
-    !id
+    type === "wishlist"
+      ? setEvents(wishlist)
+      : !id
       ? getFetch("http://localhost:3000/events", setEvents)
       : getFetch(`http://localhost:3000/events/find/${id}`, setEvents);
-  }, [id]);
+  }, [id, location, wishlist]);
 
   const category = apiCategories.find((item) => item._id == id);
 
   return (
     <>
+      <Helmet>
+        <title>
+          {type === "wishlist"
+            ? "Wishlist"
+            : !id
+            ? "All events"
+            : category?.name}
+        </title>
+      </Helmet>
       <div className="category">
         <div className="container-1200">
           <div className="category__header category__element">
-            {!id ? "All events" : category?.name}
+            {type === "wishlist"
+              ? "Wishlist"
+              : !id
+              ? "All events"
+              : category?.name}
           </div>
           <div className="category__control category__element">
             <div className="category__picker category__control__item">

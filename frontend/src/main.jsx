@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import MainProvider from "./contexts/MainProvider/index.jsx";
@@ -7,9 +8,11 @@ import MainProvider from "./contexts/MainProvider/index.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <MainProvider>
-        <App />
-      </MainProvider>
+      <HelmetProvider>
+        <MainProvider>
+          <App />
+        </MainProvider>
+      </HelmetProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

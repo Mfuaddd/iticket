@@ -4,7 +4,7 @@
   min-height: calc(100vh - 100px);
   &__element{
     padding-top: 48px;
-    padding-bottom: 24px;
+    padding-bottom: 48px;
   }
   &__header{
     font-size: 30px;
@@ -34,5 +34,16 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     gap: 40px;
+  }
+  @media only screen and (max-width: 1256px) {
+    margin-top: 0;
+    &__body {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    &__body {
+      grid-template-columns: 1fr;
+    }
   }
 }

@@ -17,6 +17,7 @@ export const verifyAccess = (roles) => {
       }
 
       const decode = jwt.verify(token, process.env.JWT_KEY);
+      res.locals.decode = decode;
       if (!roles.includes(decode.role)) {
         console.log("You Dont Have Access");
         return res.status(401).send("You Dont Have Access");

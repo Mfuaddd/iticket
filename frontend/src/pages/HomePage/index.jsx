@@ -1,10 +1,14 @@
 import React from "react";
-import Welcome from "../../components/Welcome";
+import { Helmet } from 'react-helmet-async';
 import HomeSection from "../../components/HomeSection";
+import Welcome from "../../components/Welcome";
 
 function HomePage() {
   return (
     <>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <Welcome />
       <HomeSection
         section="popular"
