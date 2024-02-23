@@ -6,6 +6,7 @@ import { fetchContext } from "../../contexts/FetchProvider";
 
 function HomePage() {
   const { apiPlaces, apiCategories } = useContext(fetchContext);
+
   return (
     <>
       <Helmet>
@@ -19,8 +20,9 @@ function HomePage() {
         bg={false}
       />
       {apiCategories &&
-        apiCategories.map((item) => (
-          <>
+        apiCategories
+          .slice(0, 3)
+          .map((item) => (
             <HomeSection
               key={item._id}
               section={item.name}
@@ -28,29 +30,20 @@ function HomePage() {
               endpoint={`events/find/${item._id}`}
               bg={false}
             />
-            {console.log(item)}
-          </>
-        ))}
+          ))}
 
-      <HomeSection
-        section="theatre"
-        header="Theatre"
-        endpoint="events"
-        bg={false}
-      />
-      <HomeSection section="kids" header="Kids" endpoint="events" bg={true} />
-      <HomeSection
-        section="weekends"
-        header="Weekends"
-        endpoint="events"
-        bg={true}
-      />
-      <HomeSection
-        section="new"
-        header="What's new"
-        endpoint="events"
-        bg={true}
-      />
+      {apiCategories &&
+        apiCategories
+          .slice(3)
+          .map((item) => (
+            <HomeSection
+              key={item._id}
+              section={item.name}
+              header={item.name}
+              endpoint={`events/find/${item._id}`}
+              bg={true}
+            />
+          ))}
     </>
   );
 }

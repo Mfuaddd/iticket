@@ -9,12 +9,12 @@ import { useNavigate } from "react-router-dom";
 
 function Welcome() {
   const [Events, setEvents] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     getFetch("http://localhost:3000/events", setEvents);
   }, []);
-  
+
   return (
     <div className="welcome">
       <div className="container-1400 welcome__wrapper">
@@ -31,16 +31,20 @@ function Welcome() {
           loop={true}
         >
           {Events &&
-            Events.slice(0, 8).map((item) => (
-              <SwiperSlide key={item._id}>
-                <img
-                  onClick={()=>navigate(`/detail/${item._id}`)}
-                  className="no-select"
-                  src={item.slide_img}
-                  alt={item.name}
-                />
-              </SwiperSlide>
-            ))}
+            Events.slice(0, 8).map((item) => {
+              if (!!item.slide_img) {
+                return (
+                  <SwiperSlide key={item._id}>
+                    <img
+                      onClick={() => navigate(`/detail/${item._id}`)}
+                      className="no-select"
+                      src={item.slide_img}
+                      alt={item.name}
+                    />
+                  </SwiperSlide>
+                );
+              }
+            })}
         </Swiper>
         <div className="welcome__swiper__prev welcome__swiper__button no-select">
           <ArrowSvg />

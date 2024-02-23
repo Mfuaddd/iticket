@@ -16,7 +16,7 @@ import { wishlistContext } from "../../contexts/WishlistProvider";
 import { date } from "yup";
 
 function CategoryPage({ type }) {
-  const [sliderRange, setSliderRange] = useState([0, 100]);
+  const [sliderRange, setSliderRange] = useState([0, 50]);
   const [dateRange, setDateRange] = useState([
     new Date(Date.now()),
     new Date(Date.now()),
@@ -97,7 +97,8 @@ function CategoryPage({ type }) {
               </div>
               <RangeSlider
                 className="category__slider__item"
-                defaultValue={[0, 100]}
+                max={50}
+                defaultValue={[0, 50]}
                 color={"#ffdd00"}
                 onChange={setSliderRange}
               />

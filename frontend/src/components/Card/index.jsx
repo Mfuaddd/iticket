@@ -8,7 +8,8 @@ function Card({ item }) {
   const navigate = useNavigate();
 
   const toNormalDate = (time) => {
-    return new Date(time).toDateString().slice(4);
+    const t = time.split(",")
+    return new Date(+t[0]).toDateString().slice(4);
   };
 
   const findName = (array, id) => {
