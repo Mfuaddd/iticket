@@ -1,9 +1,11 @@
-import React from "react";
-import { Helmet } from 'react-helmet-async';
+import React, { useContext } from "react";
+import { Helmet } from "react-helmet-async";
 import HomeSection from "../../components/HomeSection";
 import Welcome from "../../components/Welcome";
+import { fetchContext } from "../../contexts/FetchProvider";
 
 function HomePage() {
+  const { apiPlaces, apiCategories } = useContext(fetchContext);
   return (
     <>
       <Helmet>
@@ -16,12 +18,20 @@ function HomePage() {
         endpoint="events"
         bg={false}
       />
-      <HomeSection
-        section="tourism"
-        header="Tourism"
-        endpoint="events"
-        bg={false}
-      />
+      {apiCategories &&
+        apiCategories.map((item) => (
+          <>
+            <HomeSection
+              key={item._id}
+              section={item.name}
+              header={item.name}
+              endpoint={`events/find/${item._id}`}
+              bg={false}
+            />
+            {console.log(item)}
+          </>
+        ))}
+
       <HomeSection
         section="theatre"
         header="Theatre"

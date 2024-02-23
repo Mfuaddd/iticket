@@ -45,7 +45,7 @@ function HomeSection({ section, header, endpoint, bg }) {
             },
           }}
         >
-          {apiData &&
+          {apiData.length &&
             apiData.map((item) => (
               <SwiperSlide
                 key={item._id}

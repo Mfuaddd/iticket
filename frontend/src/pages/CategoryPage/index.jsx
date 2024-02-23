@@ -13,9 +13,14 @@ import { fetchContext } from "../../contexts/FetchProvider";
 import { getFetch } from "../../helpers/FetchHelper";
 import { tokenContext } from "../../contexts/TokenProvider";
 import { wishlistContext } from "../../contexts/WishlistProvider";
+import { date } from "yup";
 
 function CategoryPage({ type }) {
   const [sliderRange, setSliderRange] = useState([0, 100]);
+  const [dateRange, setDateRange] = useState([
+    new Date(Date.now()),
+    new Date(Date.now()),
+  ]);
   const [placeFilter, setPlaceFilter] = useState(null);
   const { apiPlaces, apiCategories } = useContext(fetchContext);
   const { wishlist } = useContext(wishlistContext);
@@ -33,6 +38,11 @@ function CategoryPage({ type }) {
   }, [id, location, wishlist]);
 
   const category = apiCategories.find((item) => item._id == id);
+
+  const dateFilter = (item) => {
+    const date = item.date.split(",");
+    return date[0] <= dateRange[1] && date[1] >= dateRange[0];
+  };
 
   return (
     <>
@@ -68,12 +78,17 @@ function CategoryPage({ type }) {
             </div>
             <div className="category__calendar category__control__item">
               <DateRangePicker
-                showOneCalendar
                 size="lg"
                 format="dd.MM.yyyy"
                 block
                 ranges={[]}
                 showHeader={false}
+                defaultValue={dateRange}
+                onChange={(date) => {
+                  date
+                    ? setDateRange([Date.parse(date[0]), Date.parse(date[1])])
+                    : "";
+                }}
               />
             </div>
             <div className="category__slider rs-picker  rs-picker-default rs-picker-input category__control__item">
@@ -94,7 +109,8 @@ function CategoryPage({ type }) {
                 (item) =>
                   item.price >= sliderRange[0] &&
                   item.price <= sliderRange[1] &&
-                  (item.place_id === placeFilter || placeFilter === null)
+                  (item.place_id === placeFilter || placeFilter === null) &&
+                  dateFilter(item)
               ).map((item) => <Card item={item} key={item._id} />)}
           </div>
         </div>

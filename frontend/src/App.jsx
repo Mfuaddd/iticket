@@ -10,6 +10,7 @@ import DetailPage from "./pages/DetailPage";
 import HomePage from "./pages/HomePage";
 import PrivateRoute from "./routes/PrivateRoute";
 import { wishlistContext } from "./contexts/WishlistProvider";
+import AboutPage from "./pages/AboutPage";
 
 function App() {
   const { apiCategories, getApiPlaces, getApiCategories } =
@@ -33,7 +34,8 @@ function App() {
           <Route path="/events" element={<CategoryPage />} />
           <Route path="/events/:id" element={<CategoryPage />} />
           <Route path="/wishlist" element={<CategoryPage type="wishlist" />} />
-          <Route path="*" element={<h1>404</h1>} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Route>
         <Route path={"/adminpanel"} element={<PrivateRoute />}>
           <Route index element={<Navigate to="/adminpanel/users" />} />

@@ -8,6 +8,7 @@ import cards from "../../assets/images/cards.svg";
 
 import ITicketLogoSvg from "../../assets/icons/ITicketLogoSvg";
 import "./index.scss";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -35,7 +36,9 @@ function Footer() {
           <div className="footer__section">
             <div className="footer__title">iTicket</div>
             <ul className="footer__list">
-              <li>About us</li>
+              <li>
+                <Link to="/about">About us</Link>
+              </li>
               <li>Venues</li>
               <li>Point of Sales</li>
               <li>Karabakh Revival Foundation</li>

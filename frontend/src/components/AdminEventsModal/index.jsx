@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { fetchContext } from "../../contexts/FetchProvider";
 import { tokenContext } from "../../contexts/TokenProvider";
+import DateRangePicker from "rsuite/DateRangePicker";
+import "rsuite/DateRangePicker/styles/index.css";
 
 function AdminEventsModal({ setIsOpen, name, values }) {
   const { apiCategories, apiPlaces } = useContext(fetchContext);
@@ -14,6 +16,19 @@ function AdminEventsModal({ setIsOpen, name, values }) {
       input[e.target.id] = e.target.value;
     }
     setInput({ ...input });
+  };
+
+  const handleDate = (date) => {
+    input["date"] = date ? [Date.parse(date[0]), Date.parse(date[1])] : "";
+    setInput({ ...input });
+  };
+
+  const dateValue = () => {
+    const data = !!values._id
+      ? input.date.split(",").map((d) => new Date(+d))
+      : "";
+    console.log(data);
+    return data;
   };
 
   const postFetch = async () => {
@@ -50,6 +65,9 @@ function AdminEventsModal({ setIsOpen, name, values }) {
     setIsOpen(false);
   };
 
+  console.log(input);
+  console.log([new Date("2017-02-01"), new Date("2017-05-20")]);
+
   return (
     <div className="admin-modal">
       <div className="admin-modal__content">
@@ -80,12 +98,15 @@ function AdminEventsModal({ setIsOpen, name, values }) {
               />
             </div>
             <div className="admin-modal__form__item">
-              <label htmlFor="date">Date</label>
-              <input
-                type="text"
-                id="date"
-                value={input["date"]}
-                onChange={handleChange}
+              <label htmlFor="price">Date</label>
+              <DateRangePicker
+                size="lg"
+                format="dd.MM.yyyy"
+                block
+                ranges={[]}
+                defaultValue={dateValue}
+                showHeader={false}
+                onChange={handleDate}
               />
             </div>
             <div className="admin-modal__form__item">

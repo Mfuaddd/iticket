@@ -5,7 +5,8 @@ import { Navigate, Outlet } from "react-router-dom";
 function PrivateRoute() {
   const { decode } = useContext(tokenContext);
 
-  if (decode !== null) {
+  console.log(decode);
+  if (!!decode) {
     return decode.role === "admin" ? <Outlet /> : <Navigate to="/" />;
   }
 }
